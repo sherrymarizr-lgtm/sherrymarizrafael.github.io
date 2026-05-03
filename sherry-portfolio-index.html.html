@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sherry Mariz Rafael — Virtual Assistant Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ink: #1a1510;
+    --copper: #b87333;
+    --copper-light: #d4956a;
+    --sage: #7a8c7e;
+    --warm-gray: #9e9289;
+    --card-bg: #faf7f2;
+    --border: #e0d8cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(245, 240, 232, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--copper); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 3rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute; right: 0; top: 15%; bottom: 15%;
+    width: 1px; background: var(--border);
+  }
+
+  .hero-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--copper-light);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: #5a5248;
+    max-width: 420px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--copper); transform: translateY(-2px); }
+
+  .btn-secondary {
+    padding: 0.9rem 2.2rem;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--copper); color: var(--copper); transform: translateY(-2px); }
+
+  /* ─── HERO RIGHT ─── */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 3rem 6rem 4rem;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.8rem 2rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s forwards;
+  }
+  .stat-card:nth-child(1) { animation-delay: 0.5s; }
+  .stat-card:nth-child(2) { animation-delay: 0.7s; margin-left: 2rem; }
+  .stat-card:nth-child(3) { animation-delay: 0.9s; }
+
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--copper), transparent);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--copper);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 0.5rem;
+  }
+  .stat-sub { font-size: 0.72rem; color: #6a6058; line-height: 1.6; }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 6rem 3rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    text-transform: uppercase;
+  }
+
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-section { background: var(--card-bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-block {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-block:hover { border-color: var(--copper); transform: translateY(-4px); }
+
+  .skill-block::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--copper), var(--copper-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .skill-block:hover::after { transform: scaleX(1); }
+
+  .skill-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .skill-list li {
+    font-size: 0.72rem;
+    color: #6a6058;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .skill-list li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--copper);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .experience-section { max-width: 900px; margin: 0 auto; }
+
+  .exp-timeline { position: relative; }
+  .exp-timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+
+  .exp-item {
+    padding-left: 3rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+  }
+  .exp-item:last-child { padding-bottom: 0; }
+
+  .exp-dot {
+    position: absolute; left: -5px; top: 4px;
+    width: 11px; height: 11px;
+    border: 2px solid var(--copper);
+    background: var(--cream);
+    border-radius: 50%;
+  }
+
+  .exp-period {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 0.6rem;
+  }
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 0.72rem;
+    color: var(--warm-gray);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-bullets li {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: #5a5248;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--copper); font-size: 1rem;
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section { background: var(--ink); color: var(--cream); }
+  .services-section .section-title { color: var(--cream); }
+  .services-section .section-num { color: var(--copper-light); }
+  .services-section .section-line { background: #3a322a; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: #3a322a;
+    border: 1px solid #3a322a;
+  }
+
+  .service-item {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+  }
+  .service-item:hover { background: #251f18; }
+
+  .service-num {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--copper);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--cream);
+  }
+
+  .service-desc { font-size: 0.72rem; line-height: 1.8; color: #a09588; }
+
+  /* ─── TOOLS ─── */
+  .tools-section { padding: 4rem 3rem; background: var(--card-bg); }
+
+  .tools-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
+  .tool-tag {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: #6a6058;
+    background: var(--cream);
+    transition: all 0.2s;
+  }
+  .tool-tag:hover { border-color: var(--copper); color: var(--copper); }
+
+  /* ─── TESTIMONIAL ─── */
+  .testimonial-section {
+    text-align: center;
+    padding: 6rem 3rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .testimonial-attr {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--ink);
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-left .section-title { color: var(--cream); font-size: 2.5rem; margin-bottom: 1.5rem; }
+  .contact-left p { font-size: 0.78rem; line-height: 1.9; color: #a09588; }
+
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    padding: 1.5rem;
+    border: 1px solid #3a322a;
+    transition: border-color 0.3s;
+  }
+  .contact-item:hover { border-color: var(--copper); }
+
+  .contact-icon { font-size: 1.2rem; }
+
+  .contact-info-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-info-value {
+    font-size: 0.78rem;
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-gray);
+    background: var(--cream);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 5rem 1.5rem 3rem; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 2rem 1.5rem 4rem; }
+    .stat-card:nth-child(2) { margin-left: 0; }
+    section { padding: 4rem 1.5rem; }
+    .contact-section { grid-template-columns: 1fr; }
+    .hero-name { font-size: 3.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">Sherry Mariz Rafael</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Virtual Assistant · Part-Time · Remote</p>
+    <h1 class="hero-name">Sherry Mariz<br><em>Rafael</em></h1>
+    <p class="hero-title">English Teacher & Virtual Assistant</p>
+    <p class="hero-desc">
+      I am an English teacher currently based in Vietnam, with 8 years of experience in teaching and cross-cultural communication. I bring precision, warmth, and reliability to every task — helping clients communicate clearly and operate smoothly, one task at a time.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Hire Me</a>
+      <a href="#services" class="btn-secondary">View Services</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years of Teaching Experience</div>
+      <div class="stat-sub">English instruction, lesson planning, and curriculum design for diverse learners</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">ESL</div>
+      <div class="stat-label">Currently Teaching in Vietnam</div>
+      <div class="stat-sub">1-on-1 and online classes for young adults and all ages — English communication and conversation</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">VA</div>
+      <div class="stat-label">Available Part-Time · Remote</div>
+      <div class="stat-sub">Organized, detail-oriented, and fluent in English — ready to support your operations</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-header">
+    <span class="section-num">01 — Skills</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title" style="margin-bottom:3rem;">What I Bring<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--copper-light);">to the Table</em></h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-icon">✍️</div>
+      <div class="skill-name">Communication</div>
+      <ul class="skill-list">
+        <li>Professional email drafting & correspondence</li>
+        <li>Business writing & proofreading</li>
+        <li>Document & report preparation</li>
+        <li>ESL content creation</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🗂️</div>
+      <div class="skill-name">Administrative Support</div>
+      <ul class="skill-list">
+        <li>Calendar & schedule management</li>
+        <li>Data entry & file organization</li>
+        <li>Meeting notes & minutes</li>
+        <li>Inbox management & follow-ups</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">👥</div>
+      <div class="skill-name">Customer Support</div>
+      <ul class="skill-list">
+        <li>Cross-cultural client communication</li>
+        <li>Inquiry handling & follow-ups</li>
+        <li>Onboarding assistance</li>
+        <li>Scheduling & booking coordination</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Content & Presentations</div>
+      <ul class="skill-list">
+        <li>PowerPoint & Google Slides</li>
+        <li>Social media content drafting</li>
+        <li>Newsletter & blog editing</li>
+        <li>Lesson materials & templates</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🔍</div>
+      <div class="skill-name">SEO (Basic)</div>
+      <ul class="skill-list">
+        <li>Keyword-friendly content writing</li>
+        <li>Built a website for a client — now ranking on Google's first page</li>
+        <li>Basic on-page SEO practices</li>
+        <li>Understanding of search visibility principles</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-name">Tech Proficiency</div>
+      <ul class="skill-list">
+        <li>Google Workspace (Docs, Sheets, Drive)</li>
+        <li>Microsoft Office Suite</li>
+        <li>Canva & basic design tools</li>
+        <li>Zoom, AI Tools</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding: 6rem 3rem; max-width: 1200px; margin: 0 auto;">
+  <div class="section-header">
+    <span class="section-num">02 — Experience</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title" style="margin-bottom:3rem;">Professional <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--copper-light);">History</em></h2>
+  <div class="exp-timeline">
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">8 Years Experience · Philippines & Vietnam</div>
+      <div class="exp-role">English Teacher</div>
+      <div class="exp-company">Various Institutions · Currently Based in Vietnam</div>
+      <ul class="exp-bullets">
+        <li>1-on-1 personalized English sessions tailored to each student's goals and pace</li>
+        <li>Online English classes for students across different countries and time zones</li>
+        <li>Business English — helping professionals and business owners communicate confidently in the workplace</li>
+        <li>Communication English — focused on real-life speaking, listening, and everyday fluency</li>
+        <li>IELTS preparation classes — guiding students through all four skills of the exam</li>
+        <li>Group classes of up to 10 students — managing classroom dynamics and keeping engagement high</li>
+        <li>Taught a wide range of learners — from young children to adults, including business owners and working professionals</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-period">Academic Achievement</div>
+      <div class="exp-role">Published Thesis Author</div>
+      <div class="exp-company">University · Philippines</div>
+      <ul class="exp-bullets">
+        <li>Completed and published an academic thesis as part of university studies</li>
+        <li>Demonstrates strong writing, analytical, and academic communication skills</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-header">
+      <span class="section-num">03 — Services</span>
+      <div class="section-line" style="background:#3a322a;"></div>
+    </div>
+    <h2 class="section-title" style="margin-bottom:3rem;">How I Can<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--copper-light);">Help You</em></h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-title">Email & Calendar Management</div>
+        <div class="service-desc">Inbox organization, drafting professional replies, scheduling meetings, and keeping your calendar running smoothly.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-title">Document & Report Writing</div>
+        <div class="service-desc">Clear, polished documents, reports, proposals, and presentations — proofread and formatted professionally.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-title">Content Editing & Proofreading</div>
+        <div class="service-desc">Grammar, clarity, tone, and flow corrections for blog posts, emails, reports, and marketing copy.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">04</div>
+        <div class="service-title">Customer & Client Support</div>
+        <div class="service-desc">Responding to inquiries, handling follow-ups, and ensuring your clients receive timely, professional communication.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">05</div>
+        <div class="service-title">SEO Content Support</div>
+        <div class="service-desc">Writing and editing content with basic SEO in mind — helping your pages get found on Google.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">06</div>
+        <div class="service-title">Social Media & Canva Design</div>
+        <div class="service-desc">Drafting captions, scheduling posts, and creating clean visual content using Canva for your brand.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section">
+  <p class="tools-label">Tools & Platforms I Work With</p>
+  <div class="tools-list">
+    <span class="tool-tag">Google Docs</span>
+    <span class="tool-tag">Google Sheets</span>
+    <span class="tool-tag">Google Drive</span>
+    <span class="tool-tag">Gmail</span>
+    <span class="tool-tag">Google Calendar</span>
+    <span class="tool-tag">Microsoft Word</span>
+    <span class="tool-tag">Microsoft Excel</span>
+    <span class="tool-tag">Microsoft PowerPoint</span>
+    <span class="tool-tag">Canva</span>
+    <span class="tool-tag">Zoom</span>
+    <span class="tool-tag">WhatsApp</span>
+    <span class="tool-tag">Facebook / Meta</span>
+    <span class="tool-tag">ChatGPT / AI Tools</span>
+    <span class="tool-tag">Notion</span>
+    <span class="tool-tag">Basic SEO</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <h2 class="section-title">Let's Work<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--copper-light);">Together</em></h2>
+    <p>I'm currently open to part-time remote Virtual Assistant roles. Whether you need help with daily admin, writing, content, or client communication, I'm ready to support your goals.</p>
+    <br>
+    <p style="color: #7a6f65;">Available for freelance and part-time engagements. Fast response time guaranteed.</p>
+  </div>
+  <div class="contact-details">
+    <div class="contact-item">
+      <div class="contact-icon">📧</div>
+      <div>
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value">sherrymarizr@gmail.com</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📱</div>
+      <div>
+        <div class="contact-info-label">WhatsApp / Viber</div>
+        <div class="contact-info-value">Available upon request</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">🌏</div>
+      <div>
+        <div class="contact-info-label">Location & Availability</div>
+        <div class="contact-info-value">Vietnam · Remote · Part-Time Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sherry Mariz Rafael · Virtual Assistant Portfolio · Built for Professional Excellence</p>
+</footer>
+
+</body>
+</html>
