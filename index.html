@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sherry Rafael — Virtual Assistant Portfolio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #f8f5f0;
+  --gold: #c9a84c;
+  --gold-dim: #8a6f30;
+  --rust: #c1440e;
+  --gray: #3a3530;
+  --gray-mid: #6b6560;
+  --gray-light: #b8b0a8;
+  --card: #131210;
+  --border: #2a2520;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(16px);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--gold); }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 0.35rem 0.9rem;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  padding-top: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: 'VA';
+  position: absolute;
+  right: -0.05em; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 28vw;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,168,76,0.07);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-left {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 4rem 6rem 3rem;
+  border-right: 1px solid var(--border);
+}
+
+.hero-issue {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 1rem;
+  opacity: 0; animation: up 0.7s 0.1s forwards;
+}
+.hero-issue::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  margin-bottom: 0.6rem;
+  opacity: 0; animation: up 0.7s 0.25s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  display: block;
+}
+
+.hero-role {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: up 0.7s 0.4s forwards;
+}
+
+.hero-summary {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #9a938b;
+  max-width: 440px;
+  margin-bottom: 3rem;
+  opacity: 0; animation: up 0.7s 0.55s forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: up 0.7s 0.7s forwards;
+}
+
+.btn-gold {
+  padding: 0.9rem 2.4rem;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-gold:hover { background: #e0bc5f; transform: translateY(-2px); }
+
+.btn-outline {
+  padding: 0.9rem 2.4rem;
+  border: 1px solid var(--border);
+  color: var(--gray-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+/* ─── HERO RIGHT ─── */
+.hero-right {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 3rem 6rem 4rem;
+  gap: 0;
+}
+
+.stat-row {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  opacity: 0; animation: up 0.7s forwards;
+}
+.stat-row:first-child { border-top: 1px solid var(--border); }
+.stat-row:nth-child(1) { animation-delay: 0.5s; }
+.stat-row:nth-child(2) { animation-delay: 0.65s; }
+.stat-row:nth-child(3) { animation-delay: 0.8s; }
+.stat-row:nth-child(4) { animation-delay: 0.95s; }
+.stat-row:nth-child(5) { animation-delay: 1.1s; }
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+  margin-bottom: 0.3rem;
+}
+
+.stat-desc { font-size: 0.78rem; color: #6b6560; line-height: 1.55; }
+
+/* ─── SECTION BASE ─── */
+.section-wrap { padding: 7rem 3rem; max-width: 1300px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.section-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold-dim); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 4rem;
+}
+.section-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+/* ─── ABOUT ─── */
+.about-section { border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 4rem;
+}
+
+.about-block {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.about-block:last-child { border-right: none; }
+
+.about-block::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.about-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.about-block p { font-size: 0.82rem; line-height: 1.9; color: #8a8380; }
+
+.about-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.fact-item {
+  background: var(--card);
+  padding: 1.8rem 1.5rem;
+  transition: background 0.2s;
+}
+.fact-item:hover { background: #1a1814; }
+
+.fact-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-bottom: 0.5rem;
+}
+
+.fact-val { font-size: 0.85rem; color: var(--white); font-weight: 400; line-height: 1.5; }
+
+/* ─── SERVICES ─── */
+.services-section { background: #080806; border-top: 1px solid var(--border); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.service-card {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover { background: #111009; }
+
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.service-card:hover::after { transform: scaleX(1); }
+
+.service-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.72rem;
+  color: var(--gold-dim);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.service-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.service-desc { font-size: 0.78rem; line-height: 1.8; color: var(--gray-mid); }
+
+/* ─── EXPERIENCE ─── */
+.exp-section { border-top: 1px solid var(--border); }
+
+.exp-timeline { position: relative; }
+.exp-timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+
+.exp-item {
+  padding-left: 3.5rem;
+  padding-bottom: 4rem;
+  position: relative;
+}
+.exp-item:last-child { padding-bottom: 0; }
+
+.exp-dot {
+  position: absolute; left: -6px; top: 5px;
+  width: 13px; height: 13px;
+  background: var(--gold);
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--gold-dim);
+}
+
+.exp-period {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.exp-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.exp-org {
+  font-size: 0.78rem;
+  color: var(--gray-mid);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.exp-list li {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: #7a7570;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.exp-list li::before {
+  content: '›';
+  position: absolute; left: 0;
+  color: var(--gold); font-size: 1rem; line-height: 1.5;
+}
+
+/* ─── CASE STUDIES ─── */
+.cases-section { border-top: 1px solid var(--border); background: #060605; }
+
+.cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
+
+.case-card { background: var(--black); padding: 3rem 2.5rem; }
+
+.case-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+}
+
+.case-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  line-height: 1.3; margin-bottom: 2rem;
+}
+
+.case-meta { display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+
+.case-stat-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem; font-weight: 900;
+  color: var(--gold); line-height: 1;
+}
+.case-stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gray-mid);
+  margin-top: 0.3rem;
+}
+
+.case-section-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gray-mid); margin-bottom: 0.5rem; margin-top: 1.5rem;
+}
+
+.case-text { font-size: 0.82rem; line-height: 1.8; color: #6b6560; }
+
+/* ─── RESULTS ─── */
+.results-section { border-top: 1px solid var(--border); }
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.result-item {
+  background: var(--card);
+  padding: 3rem 2rem;
+  transition: background 0.2s;
+}
+.result-item:hover { background: #111009; }
+
+.result-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: var(--gold); line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.6rem;
+}
+
+.result-sub { font-size: 0.75rem; color: var(--gray-mid); line-height: 1.6; }
+
+/* ─── TOOLS ─── */
+.tools-section { border-top: 1px solid var(--border); background: #060605; }
+
+.tools-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); }
+
+.tool-cat { padding: 2rem 1.8rem; border-right: 1px solid var(--border); }
+.tool-cat:last-child { border-right: none; }
+
+.tool-cat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.2rem;
+}
+
+.tool-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.tool-list li { font-size: 0.8rem; color: var(--gray-light); }
+
+/* ─── PACKAGES ─── */
+.packages-section { border-top: 1px solid var(--border); }
+
+.packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+.pkg-card {
+  background: var(--card);
+  padding: 3rem 2.5rem;
+  position: relative;
+}
+
+.pkg-card.featured { background: #181510; }
+.pkg-card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.55rem; letter-spacing: 0.2em;
+  background: var(--gold); color: var(--black);
+  padding: 0.3rem 1rem;
+  font-weight: 600;
+}
+
+.pkg-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gray-mid); margin-bottom: 1.2rem;
+}
+
+.pkg-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: var(--gold); line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.pkg-price-note { font-size: 0.72rem; color: var(--gray-mid); margin-bottom: 0.5rem; }
+.pkg-best { font-size: 0.75rem; color: #5a5550; font-style: italic; margin-bottom: 2rem; }
+
+.pkg-divider { height: 1px; background: var(--border); margin-bottom: 1.8rem; }
+
+.pkg-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.pkg-list li { font-size: 0.78rem; color: var(--gray-light); padding-left: 1.2rem; position: relative; }
+.pkg-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.75rem; }
+
+/* ─── CERTIFICATIONS ─── */
+.certs-section { border-top: 1px solid var(--border); background: #060605; }
+
+.certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
+
+.cert-item {
+  background: var(--black); padding: 2rem 2.5rem;
+  display: flex; align-items: flex-start; gap: 1.5rem;
+}
+
+.cert-badge {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--gold); line-height: 1; min-width: 3rem;
+  padding-top: 0.2rem;
+}
+
+.cert-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.3rem; color: var(--white); }
+.cert-issuer { font-size: 0.72rem; color: var(--gray-mid); }
+
+.langs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.lang-item { background: var(--card); padding: 1.8rem 2rem; }
+.lang-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.lang-level { font-size: 0.72rem; color: var(--gold); margin-bottom: 0.2rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+.lang-note { font-size: 0.7rem; color: var(--gray-mid); }
+
+/* ─── WHY ME ─── */
+.why-section { border-top: 1px solid var(--border); }
+
+.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+
+.why-card {
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  transition: border-color 0.3s;
+  position: relative;
+}
+.why-card:hover { border-color: var(--gold-dim); }
+
+.why-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: transparent; -webkit-text-stroke: 1px var(--border);
+  line-height: 1; margin-bottom: 1.2rem; transition: color 0.3s;
+}
+.why-card:hover .why-n { color: var(--gold); -webkit-text-stroke: 1px var(--gold); }
+
+.why-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; }
+.why-text { font-size: 0.82rem; line-height: 1.85; color: var(--gray-mid); }
+
+/* ─── CONTACT ─── */
+.contact-section {
+  border-top: 1px solid var(--border);
+  background: #050504;
+  padding: 7rem 3rem;
+}
+
+.contact-inner {
+  max-width: 1300px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+}
+
+.contact-left .section-title { margin-bottom: 1.5rem; }
+
+.contact-intro { font-size: 0.88rem; line-height: 1.9; color: #5a5550; margin-bottom: 2rem; }
+
+.avail-block {
+  border: 1px solid var(--border); padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.avail-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+
+.avail-text { font-size: 0.8rem; color: var(--gray-light); line-height: 1.7; }
+
+.contact-items { display: flex; flex-direction: column; gap: 0; }
+
+.contact-row {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.8rem 0; border-bottom: 1px solid var(--border);
+}
+.contact-row:first-child { border-top: 1px solid var(--border); }
+
+.contact-icon-wrap {
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+.contact-row:hover .contact-icon-wrap { border-color: var(--gold); }
+
+.contact-info-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray-mid); margin-bottom: 0.25rem;
+}
+
+.contact-info-val { font-size: 0.85rem; color: var(--white); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.8rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--black);
+}
+
+.footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem; font-style: italic; color: var(--gray-light);
+}
+
+.footer-note {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gray);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links, .nav-tag { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 5rem 1.5rem 3rem; border-right: none; }
+  .hero-right { padding: 2rem 1.5rem 4rem; }
+  .hero::before { display: none; }
+  .section-wrap { padding: 4rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-block { border-right: none; border-bottom: 1px solid var(--border); }
+  .about-facts { grid-template-columns: 1fr 1fr; }
+  .services-grid, .packages-grid, .results-grid { grid-template-columns: 1fr; }
+  .cases-grid, .why-grid, .certs-grid { grid-template-columns: 1fr; }
+  .tools-categories { grid-template-columns: 1fr 1fr; }
+  .tool-cat:nth-child(2n) { border-right: none; }
+  .langs-row { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Sherry<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-tag">Part-Time · 20 hrs/week</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-issue">Issue No. 01 · Virtual Assistant · Portfolio 2026</p>
+    <h1 class="hero-name">
+      Sherry
+      <em>Rafael</em>
+    </h1>
+    <p class="hero-role">General Virtual Assistant</p>
+    <p class="hero-summary">
+      I help entrepreneurs and businesses get more done by taking admin tasks off their plate. Detail-oriented, C1 English certified, Xero Level 1 certified, and 8+ years of professional experience across Vietnam and the Philippines.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Book a Discovery Call</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-row">
+      <div class="stat-num">8+</div>
+      <div>
+        <div class="stat-label">Years of Experience</div>
+        <div class="stat-desc">Across 15+ schools and organisations in Vietnam & the Philippines</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">C1</div>
+      <div>
+        <div class="stat-label">English Proficiency</div>
+        <div class="stat-desc">British Council Cambridge Advanced Certificate — fluent professional English</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">L1</div>
+      <div>
+        <div class="stat-label">Xero Certified Associate</div>
+        <div class="stat-desc">Certified May 2026 — invoicing, records, and basic accounting</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">#1</div>
+      <div>
+        <div class="stat-label">Google Ranking Achieved</div>
+        <div class="stat-desc">Built a client's website — now ranks #1 on Google. Zero paid ads.</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">20</div>
+      <div>
+        <div class="stat-label">Hours / Week Available</div>
+        <div class="stat-desc">Mon–Sun · 12–2 PM & 9 PM–12 AM ICT (UTC+7)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-wrap">
+    <div class="section-eyebrow">02 — About Me</div>
+    <h2 class="section-title">About <em>me.</em></h2>
+
+    <div class="about-grid">
+      <div class="about-block">
+        <div class="about-tag">The Hook</div>
+        <p>I am a detail-oriented administrative professional and English teacher with 8+ years of experience in scheduling, record management, document preparation, and client communication. Xero Level 1 Certified. C1 English — British Council Certified.</p>
+      </div>
+      <div class="about-block">
+        <div class="about-tag">The Story</div>
+        <p>I teach at HoaIELTS Kids Centre and Sunrise Kids Preschool in Vietnam — 1-on-1 classes, group classes of 10+ students, Business English, Communication English, and IELTS preparation. I also completed an administrative internship at the Development Bank of the Philippines and ran my own freelance teaching business, managing all admin independently.</p>
+      </div>
+      <div class="about-block">
+        <div class="about-tag">The Promise</div>
+        <p>When you work with me, you get clear communication, honest updates, and genuine effort on every task. I am proficient in Google Workspace, Microsoft Office, Xero, Canva, and AI tools. Part-time, 20 hours per week. I will always be upfront about what I can and cannot do.</p>
+      </div>
+    </div>
+
+    <div class="about-facts">
+      <div class="fact-item">
+        <div class="fact-label">Experience</div>
+        <div class="fact-val">8+ years</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">English Level</div>
+        <div class="fact-val">C1 — British Council</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Languages</div>
+        <div class="fact-val">English · Filipino · Vietnamese</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-label">Availability</div>
+        <div class="fact-val">Part-time · 20 hrs/week · Remote</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-wrap">
+    <div class="section-eyebrow">03 — Services</div>
+    <h2 class="section-title">What I <em>deliver.</em></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-n">01</div>
+        <div class="service-headline">An inbox that's empty by Friday.</div>
+        <div class="service-desc">Triage, draft, sort, and manage your email so nothing important slips through.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">02</div>
+        <div class="service-headline">A calendar that protects your focus.</div>
+        <div class="service-desc">Schedule appointments, block deep-work time, and keep your week conflict-free.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">03</div>
+        <div class="service-headline">Clean data, ready for decisions.</div>
+        <div class="service-desc">Accurate data entry, file organisation, and record management you can trust.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">04</div>
+        <div class="service-headline">Documents written in real English.</div>
+        <div class="service-desc">Reports, proposals, and correspondence — proofread and formatted professionally. C1 certified. You won't need to rewrite my work.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">05</div>
+        <div class="service-headline">Content that shows up consistently.</div>
+        <div class="service-desc">Drafting, formatting, and scheduling content so your brand stays active online.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-n">06</div>
+        <div class="service-headline">Basic SEO that puts you on the map.</div>
+        <div class="service-desc">Website copy and optimisation support — a client's site now ranks #1 on Google. Zero paid ads.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div class="section-wrap">
+    <div class="section-eyebrow">04 — Experience</div>
+    <h2 class="section-title">Professional <em>History.</em></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">2023 – Present · Thai Nguyen City, Vietnam</div>
+        <div class="exp-role">English Language Instructor</div>
+        <div class="exp-org">HoaIELTS Kids Centre & Sunrise Kids Preschool</div>
+        <ul class="exp-list">
+          <li>1-on-1 classes, group classes of 10+ students, and online classes for all ages</li>
+          <li>Business English, Communication English, and IELTS preparation</li>
+          <li>Managed student scheduling, records, and communications independently across institutions</li>
+          <li>Prepared lesson plans, assessments, and structured progress reports for management</li>
+          <li>Communicated professionally with parents, school administration, and institutional leadership</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">August 2018 – Present · Remote & In-Person</div>
+        <div class="exp-role">Independent English Instructor & Business Owner</div>
+        <div class="exp-org">Self-Employed</div>
+        <ul class="exp-list">
+          <li>Independently managed all admin functions: client scheduling, invoicing, contract follow-up, and record maintenance</li>
+          <li>Drafted and maintained professional correspondence with an international client base</li>
+          <li>Organised client learning records and billing documents using Google Workspace and Microsoft Office</li>
+          <li>Handled calendar management for multiple concurrent clients across different time zones</li>
+          <li>Taught business owners, working professionals, young learners, and adults</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">2019 – 2023 · Vietnam</div>
+        <div class="exp-role">English Language Instructor</div>
+        <div class="exp-org">Language Centres & Private Institutions, Vietnam</div>
+        <ul class="exp-list">
+          <li>Taught diverse learner groups including young learners, preschoolers, and exam preparation students</li>
+          <li>Coordinated with school administration via email and messaging platforms</li>
+          <li>Delivered speaking-focused lessons with real-life topics and structured feedback</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">January 2018 – June 2018 · Philippines</div>
+        <div class="exp-role">Administrative Intern (On-the-Job Training)</div>
+        <div class="exp-org">Development Bank of the Philippines</div>
+        <ul class="exp-list">
+          <li>Processed, sorted, and filed documents and client records across multiple banking departments</li>
+          <li>Performed data entry into banking systems with strict accuracy and confidentiality standards</li>
+          <li>Organised and maintained physical and digital filing systems for administrative staff</li>
+          <li>Operated under strict compliance and regulatory requirements in a professional financial institution</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow">05 — Case Studies</div>
+    <h2 class="section-title">Proof of <em>work.</em></h2>
+    <div class="cases-grid">
+
+      <div class="case-card">
+        <div class="case-label">Case Study · 01</div>
+        <div class="case-title">Building an admin and scheduling system for a multi-class teaching operation.</div>
+        <div class="case-meta">
+          <div>
+            <div class="case-stat-big">5</div>
+            <div class="case-stat-label">Concurrent Clients</div>
+          </div>
+          <div>
+            <div class="case-stat-big">8+</div>
+            <div class="case-stat-label">Years Running</div>
+          </div>
+        </div>
+        <div class="case-section-head">Problem</div>
+        <div class="case-text">Managing 5 simultaneous clients across 3 organisations with no centralised system led to scheduling conflicts, delayed report submissions, and disorganised records.</div>
+        <div class="case-section-head">Solution</div>
+        <div class="case-text">Built a personal system using Google Calendar for scheduling, Google Sheets to track student progress, and Google Drive to organise all lesson materials and records by class and date.</div>
+        <div class="case-section-head">Result</div>
+        <div class="case-text">No more missed schedules or lost files. Lesson preparation became faster, student records stayed up to date, and I could manage all 5 classes without feeling overwhelmed.</div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-label">Case Study · 02</div>
+        <div class="case-title">Plan B Philippines: From invisible to Page One of Google.</div>
+        <div class="case-meta">
+          <div>
+            <div class="case-stat-big">#1</div>
+            <div class="case-stat-label">Google Ranking</div>
+          </div>
+          <div>
+            <div class="case-stat-big">₱0</div>
+            <div class="case-stat-label">Paid Ads Used</div>
+          </div>
+        </div>
+        <div class="case-section-head">Problem</div>
+        <div class="case-text">Plan B Philippines had no online presence. Their website existed but ranked on page 8 of Google — effectively invisible to potential customers.</div>
+        <div class="case-section-head">Solution</div>
+        <div class="case-text">Researched target keywords, rewrote page copy with SEO best practices, optimised meta titles and descriptions, improved site structure, and submitted the sitemap to Google Search Console.</div>
+        <div class="case-section-head">Result</div>
+        <div class="case-text">The website moved to #1 on Google for its primary keyword within a month. Zero paid advertising. The business started receiving enquiries through the website for the first time.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow">06 — Results</div>
+    <h2 class="section-title">By the <em>numbers.</em></h2>
+    <div class="results-grid">
+      <div class="result-item">
+        <div class="result-big">8+</div>
+        <div class="result-label">Years Experience</div>
+        <div class="result-sub">Across 15+ schools and organisations in 2 countries</div>
+      </div>
+      <div class="result-item">
+        <div class="result-big">#1</div>
+        <div class="result-label">Google Ranking</div>
+        <div class="result-sub">Achieved for a client's website — zero paid ads</div>
+      </div>
+      <div class="result-item">
+        <div class="result-big">6+</div>
+        <div class="result-label">Hours Saved / Week</div>
+        <div class="result-sub">Reclaimed from admin in self-employed tutoring practice</div>
+      </div>
+      <div class="result-item">
+        <div class="result-big">100%</div>
+        <div class="result-label">On-Time Delivery</div>
+        <div class="result-sub">Across all client lesson plans and progress reports</div>
+      </div>
+      <div class="result-item">
+        <div class="result-big">5</div>
+        <div class="result-label">Current Clients</div>
+        <div class="result-sub">3 teaching roles + 2 private tutoring classes at present</div>
+      </div>
+      <div class="result-item">
+        <div class="result-big">C1</div>
+        <div class="result-label">English Level</div>
+        <div class="result-sub">British Council certified — fluent professional English</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow">07 — Tools</div>
+    <h2 class="section-title">Tools I work <em>in.</em></h2>
+    <div class="tools-categories">
+      <div class="tool-cat">
+        <div class="tool-cat-label">Productivity</div>
+        <ul class="tool-list">
+          <li>Google Workspace</li>
+          <li>Google Drive</li>
+          <li>Microsoft Office</li>
+          <li>Xero (L1 Certified)</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-label">AI & Writing</div>
+        <ul class="tool-list">
+          <li>Claude AI</li>
+          <li>ChatGPT</li>
+          <li>Grammarly</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-label">Communication</div>
+        <ul class="tool-list">
+          <li>Zoom</li>
+          <li>Google Meet</li>
+          <li>WhatsApp</li>
+          <li>Telegram</li>
+        </ul>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-label">Content & Web</div>
+        <ul class="tool-list">
+          <li>Canva</li>
+          <li>WordPress (Basic)</li>
+          <li>Meta Business Suite</li>
+          <li>Basic SEO</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section class="why-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow">08 — Why Me</div>
+    <h2 class="section-title">Why work <em>with me.</em></h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-n">01</div>
+        <div class="why-title">C1 English — Certified, Not Claimed.</div>
+        <div class="why-text">I hold a British Council C1 Advanced English Certificate. Every email, every document, every client communication is written in professional, natural English. You will never need to rewrite my work before it goes out.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-n">02</div>
+        <div class="why-title">Flexible Hours, Clear Communication.</div>
+        <div class="why-text">Available 12–2 PM and 9 PM–12 AM Vietnam time (ICT, UTC+7), making me accessible to clients across multiple time zones. I respond promptly and always communicate clearly about my schedule.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-n">03</div>
+        <div class="why-title">Real Admin Experience, Not Just Teaching.</div>
+        <div class="why-text">I completed a formal administrative internship at the Development Bank of the Philippines and hold a Xero Level 1 certification. I've been managing scheduling, data entry, reporting, and client communications for nearly a decade.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-n">04</div>
+        <div class="why-title">Tech-Savvy and Genuinely Curious.</div>
+        <div class="why-text">I use Claude AI and ChatGPT daily. I built a website that ranks #1 on Google. I learn new tools quickly and figure things out without needing to be walked through everything. Hire me and I'll already know the tool by next Monday.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow">09 — Education & Credentials</div>
+    <h2 class="section-title">Certifications & <em>Languages.</em></h2>
+    <div class="certs-grid">
+      <div class="cert-item">
+        <div class="cert-badge">Xero</div>
+        <div>
+          <div class="cert-name">Xero Certified Associate — Level 1</div>
+          <div class="cert-issuer">Xero · May 2026</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">C1</div>
+        <div>
+          <div class="cert-name">C1 Advanced English Certificate</div>
+          <div class="cert-issuer">British Council — Cambridge English Proficiency</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">TESOL</div>
+        <div>
+          <div class="cert-name">TESOL Certificate</div>
+          <div class="cert-issuer">International Open Academy</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">TEFL</div>
+        <div>
+          <div class="cert-name">TEFL Certificate</div>
+          <div class="cert-issuer">TEFL Professional Development Institute</div>
+        </div>
+      </div>
+    </div>
+    <div class="langs-row">
+      <div class="lang-item">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Fluent · C1 Level</div>
+        <div class="lang-note">British Council Certified</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">Filipino</div>
+        <div class="lang-level">Native</div>
+        <div class="lang-note">First language</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">Vietnamese</div>
+        <div class="lang-level">Conversational</div>
+        <div class="lang-note">Living & working in Vietnam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section" id="packages">
+  <div class="section-wrap">
+    <div class="section-eyebrow">10 — Packages</div>
+    <h2 class="section-title">Three ways to work <em>together.</em></h2>
+    <div class="packages-grid">
+      <div class="pkg-card">
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-price">$160</div>
+        <div class="pkg-price-note">Starting from / month</div>
+        <div class="pkg-best">Best for: trying things out, 1–2 small tasks per week.</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-list">
+          <li>10 hrs/week support</li>
+          <li>Email triage & organisation</li>
+          <li>Calendar management</li>
+          <li>Weekly summary report</li>
+        </ul>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-name">Professional</div>
+        <div class="pkg-price">$320</div>
+        <div class="pkg-price-note">Starting from / month</div>
+        <div class="pkg-best">Best for: regular weekly support, growing businesses.</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-list">
+          <li>20 hrs/week support</li>
+          <li>Email + calendar management</li>
+          <li>Data entry & file organisation</li>
+          <li>Content coordination</li>
+          <li>Basic SEO support</li>
+          <li>Weekly reporting</li>
+        </ul>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Premium</div>
+        <div class="pkg-price">$480</div>
+        <div class="pkg-price-note">Starting from / month</div>
+        <div class="pkg-best">Best for: heavier workloads, multiple ongoing tasks.</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-list">
+          <li>Up to 20 hrs/week support</li>
+          <li>All Professional inclusions</li>
+          <li>Social media coordination</li>
+          <li>Document prep & formatting</li>
+          <li>Priority response time</li>
+          <li>Monthly strategy check-in</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow">11 — Contact</div>
+      <h2 class="section-title">Let's <em>talk.</em></h2>
+      <p class="contact-intro">Tell me what you need help with. I will be honest about what I can do and how we can work together.</p>
+      <div class="avail-block">
+        <div class="avail-label">Availability</div>
+        <div class="avail-text">
+          Mon–Sun · 12:00–2:00 PM & 9:00 PM–12:00 AM (ICT, UTC+7)<br>
+          5–6 AM & 2–5 PM UTC · Part-time · 20 hrs/week<br>
+          Stable fibre connection · Mobile data backup
+        </div>
+      </div>
+    </div>
+    <div class="contact-items">
+      <div class="contact-row">
+        <div class="contact-icon-wrap">📧</div>
+        <div>
+          <div class="contact-info-lbl">Email</div>
+          <div class="contact-info-val">sherrymarizr@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-wrap">💬</div>
+        <div>
+          <div class="contact-info-lbl">WhatsApp / Telegram</div>
+          <div class="contact-info-val">+84 931 581 537</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-wrap">🌏</div>
+        <div>
+          <div class="contact-info-lbl">Location</div>
+          <div class="contact-info-val">Thai Nguyen City, Vietnam</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon-wrap">⚡</div>
+        <div>
+          <div class="contact-info-lbl">Response Time</div>
+          <div class="contact-info-val">Within 4 business hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Sherry Rafael · General Virtual Assistant</div>
+  <div class="footer-note">Portfolio 2026 · Thai Nguyen City, Vietnam · sherrymarizr@gmail.com</div>
+</footer>
+
+</body>
+</html>
